@@ -1,0 +1,30 @@
+clear all; close all; clc
+cd(fileparts(mfilename('fullpath')));
+
+load data.mat
+dir = './subset';
+im_names = ls('*.png');
+n_to_sample = 160;
+
+im_idxs = str2num(im_names(:,6:8)); 
+
+%% Move the images in four different directories, randomly
+idxs = randperm(length(im_to_copy));
+run_dirs = ls(strcat(dir,'/run*'));
+
+for i = 1:length(im_to_copy)
+    copyfile(im_to_copy(idxs(i),:), ...
+        fullfile(dir,run_dirs(floor((i-1)/40)+1,:)));
+end
+
+%% Sample the features
+
+idxs =                              %#ok<ST2NM>
+
+subset_features = sampled_features(idxs,:);
+subset_tMatrix =  sampled_tMatrix(:,:,idxs);
+
+
+
+
+
